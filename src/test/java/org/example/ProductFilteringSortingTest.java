@@ -1,9 +1,7 @@
 package org.example;
 
-import static org.junit.jupiter.api.Assertions.*;
-
+import org.jspecify.annotations.Nullable;
 import org.junit.jupiter.api.*;
-import org.junit.jupiter.params.ParameterizedTest;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
@@ -11,14 +9,8 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.interactions.Actions;
-import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
-
-import java.time.Duration;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -143,13 +135,50 @@ public class ProductFilteringSortingTest {
         String actualText = newDropdown.getFirstSelectedOption().getText().trim();
         assertEquals("CIJENA (PRVO NAJNIŽA)", actualText);
     }
-}
-/*
-/html/body/main/div[5]/div[2]/div[2]/div/div/div[2]/div[17]/div[1]/div/div[2]/div[2]
 
-/html/body/main/div[5]/div[2]/div[2]/div/div/div[2]/div[5]/div[1]/div/div[2]/div[2]
-/html/body/main/div[5]/div[2]/div[2]/div/div/div[2]/div[4]/div[1]/div/div[2]/div[2]
-/html/body/main/div[5]/div[2]/div[2]/div/div/div[2]/div[3]/div[1]/div/div[2]/div[2]
-/html/body/main/div[5]/div[2]/div[2]/div/div/div[2]/div[2]/div[1]/div/div[2]/div[2]
-/html/body/main/div[5]/div[2]/div[2]/div/div/div[2]/div[1]/div[1]/div/div[2]/div[2]
-*/
+    @Test
+    public void sortByRatings(){
+        WebElement select = driver.findElement(By.xpath("//*[@id=\"sortOptions1\"]"));
+        select.click();
+
+        Select option = new Select(select);
+        option.selectByValue("topRated");
+
+        try{
+            Thread.sleep(2000);
+        }catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        WebElement newSelectElement = driver.findElement(By.xpath("//*[@id=\"sortOptions1\"]"));
+        Select newDropdown = new Select(newSelectElement);
+        String actualText = newDropdown.getFirstSelectedOption().getText().trim();
+        assertEquals("NAJVIŠE OCJENE", actualText);
+    }
+
+    @Test
+    public void sortByBrand(){
+        WebElement element = driver.findElement(By.xpath("//*[@id=\"product-facet\"]/div[4]/div[2]/ul[1]/li[1]/form/label/span/span[1]"));
+        JavascriptExecutor jse = (JavascriptExecutor)driver;
+        jse.executeScript("window.scrollBy(0, 100)");
+
+        try{
+            Thread.sleep(2000);
+        }catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        //driver.findElement(By.xpath())
+        //((JavascriptExecutor)driver).executeScript("window.scrollTo(0,document.body.scrollHeight);");
+
+        element.click();
+
+
+        WebElement finalText = driver.findElement(By.xpath("//*[@id=\"product-facet\"]/div[1]/div[2]/ul/li/form"));
+        String actualText = finalText.getText().trim();
+        assertEquals("AMD", actualText);
+
+    }
+
+    //*[@id="product-facet"]/div[4]/div[2]/ul[1]/li[1]/form/label/span/span[1]
+}

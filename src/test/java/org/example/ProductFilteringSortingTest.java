@@ -28,7 +28,7 @@ public class ProductFilteringSortingTest {
     private WebDriverWait wait;
 
     @BeforeEach
-    public void setUp2() throws InterruptedException {
+    public void setUp() throws InterruptedException {
         System.setProperty("webdriver.chrome.driver",
                 "C:/Users/MS/chromedriver.exe");
         ChromeOptions options = new ChromeOptions();
@@ -36,17 +36,7 @@ public class ProductFilteringSortingTest {
         driver = new ChromeDriver(options);
 
         driver.manage().window().maximize();
-    }
 
-    @AfterEach
-    public void tearDown() {
-        if (driver != null) {
-            driver.quit();
-        }
-    }
-
-    @Test
-    public void FilterByPriceRange(){
         driver.get("https://www.ekupi.ba/bs/");
         driver.manage().window().fullscreen();
 
@@ -77,7 +67,17 @@ public class ProductFilteringSortingTest {
         WebElement text = driver.findElement(By.xpath("/html/body/main/div[5]/div[1]/h1"));
 
         assertEquals("Računarske komponente", text.getText());
+    }
 
+    @AfterEach
+    public void tearDown() {
+        if (driver != null) {
+            driver.quit();
+        }
+    }
+
+    @Test
+    public void FilterByPriceRange(){
         WebElement lowPrice = driver.findElement(By.xpath("//*[@id=\"product-facet\"]/div[3]/div[2]/ul/li[2]/div/div[1]/input"));
         lowPrice.clear();
         lowPrice.sendKeys("67");
@@ -100,6 +100,48 @@ public class ProductFilteringSortingTest {
         WebElement finalText = driver.findElement(By.xpath("//*[@id=\"product-facet\"]/div[1]/div[2]/ul/li/form"));
         String actualText = finalText.getText().trim();
         assertEquals("Cijena Od 67 KM Do 99 KM", actualText);
+    }
+
+
+    @Test
+    public void sortByPriceHigh(){
+        //*[@id="sortOptions1"]
+        WebElement select = driver.findElement(By.xpath("//*[@id=\"sortOptions1\"]"));
+        select.click();
+
+        Select option = new Select(select);
+        option.selectByValue("price-desc");
+
+        try{
+            Thread.sleep(2000);
+        }catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        WebElement newSelectElement = driver.findElement(By.xpath("//*[@id=\"sortOptions1\"]"));
+        Select newDropdown = new Select(newSelectElement);
+        String actualText = newDropdown.getFirstSelectedOption().getText().trim();
+        assertEquals("CIJENA (PRVO NAJVIŠA)", actualText);
+    }
+
+    @Test
+    public void sortByPriceLow(){
+        WebElement select = driver.findElement(By.xpath("//*[@id=\"sortOptions1\"]"));
+        select.click();
+
+        Select option = new Select(select);
+        option.selectByValue("price-asc");
+
+        try{
+            Thread.sleep(2000);
+        }catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        WebElement newSelectElement = driver.findElement(By.xpath("//*[@id=\"sortOptions1\"]"));
+        Select newDropdown = new Select(newSelectElement);
+        String actualText = newDropdown.getFirstSelectedOption().getText().trim();
+        assertEquals("CIJENA (PRVO NAJNIŽA)", actualText);
     }
 }
 /*

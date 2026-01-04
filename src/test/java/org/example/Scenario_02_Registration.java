@@ -98,7 +98,7 @@ public class TestRegistration {
         webDriver.findElement(By.className("login_link")).click();
         Thread.sleep(1000);
 
-        Select  titula = new Select(webDriver.findElement(By.id("register.title")));
+        Select titula = new Select(webDriver.findElement(By.id("register.title")));
         titula.selectByIndex(2);
 
         String registerUrl = webDriver.getCurrentUrl();

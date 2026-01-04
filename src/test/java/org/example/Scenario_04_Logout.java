@@ -74,7 +74,7 @@ public class Scenario_04_Logout {
 
         try {
             WebElement profileButton = webDriver.findElement(By.linkText("Moj profil"));
-            assertTrue(false, "Profile button should not be visible when logged out");
+            fail("Profile button should not be visible when logged out");
         } catch (NoSuchElementException e) {
             assertTrue(true);
         }

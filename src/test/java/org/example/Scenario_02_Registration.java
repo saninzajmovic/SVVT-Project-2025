@@ -12,7 +12,7 @@ import org.openqa.selenium.support.ui.Select;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
-public class TestRegistration {
+public class Scenario_02_Registration {
 
     private static WebDriver webDriver;
     private static String baseUrl;

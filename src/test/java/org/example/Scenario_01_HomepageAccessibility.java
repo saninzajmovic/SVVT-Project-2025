@@ -9,7 +9,7 @@ import org.openqa.selenium.chrome.ChromeOptions;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class TestHomepageAccessibility {
+class Scenario_01_HomepageAccessibility {
 
     private static WebDriver webDriver;
     private static String baseUrl;

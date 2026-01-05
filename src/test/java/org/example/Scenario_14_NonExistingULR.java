@@ -11,7 +11,7 @@ import java.time.Duration;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-public class NonExistingULRTest {
+public class Scenario_14_NonExistingULR {
 
     private WebDriver driver;
     private WebDriverWait wait;

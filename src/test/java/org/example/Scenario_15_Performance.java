@@ -11,7 +11,7 @@ import java.time.Duration;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-public class PerformanceTest {
+public class Scenario_15_Performance {
 
     private WebDriver driver;
     private WebDriverWait wait;

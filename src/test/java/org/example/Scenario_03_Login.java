@@ -51,7 +51,7 @@ public class Scenario_03_Login {
 
         Thread.sleep(1000);
 
-        assertEquals(loginUrl, webDriver.getCurrentUrl());
+        assertEquals(loginUrl, webDriver.getCurrentUrl(), "Should not be redirected");
 
         Thread.sleep(4000);
     }
@@ -73,7 +73,7 @@ public class Scenario_03_Login {
 
         Thread.sleep(1000);
         String message = webDriver.findElement(By.xpath("/html/body/main/div[5]/div[1]/div")).getText().split("\n")[1];
-        assertEquals("Email adresa ili lozinka su neispravni.", message);
+        assertEquals("Email adresa ili lozinka su neispravni.", message, "Should get error message");
 
         Thread.sleep(4000);
     }
@@ -96,8 +96,8 @@ public class Scenario_03_Login {
 
         String welcomeMessage = webDriver.findElement(By.xpath("/html/body/main/header/nav[2]/div/div[2]/div[2]/ul[2]/li[2]")).getText();
 
-        assertNotEquals(registerUrl, webDriver.getCurrentUrl());
-        assertEquals("Dobrodošli Memo", welcomeMessage);
+        assertNotEquals(registerUrl, webDriver.getCurrentUrl(), "Should get redirected");
+        assertEquals("Dobrodošli Memo", welcomeMessage, "Should show welcome message");
 
         Thread.sleep(4000);
     }

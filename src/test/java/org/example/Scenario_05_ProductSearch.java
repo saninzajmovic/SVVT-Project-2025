@@ -47,7 +47,7 @@ public class Scenario_05_ProductSearch {
             WebElement result = webDriver.findElement(By.partialLinkText("laptop"));
             assertTrue(true);
         } catch (NoSuchElementException e) {
-            fail();
+            fail("There should be 'laptop' in results");
         }
     }
 
@@ -60,7 +60,7 @@ public class Scenario_05_ProductSearch {
         webDriver.findElement(By.className("js_search_button")).click();
 
         String noResultsMessage = webDriver.findElement(By.xpath("/html/body/main/div[5]/div[2]/div[1]")).getText();
-        assertEquals("0 artikala pronađenih za traženi pojam " + keysToSend, noResultsMessage);
+        assertEquals("0 artikala pronađenih za traženi pojam " + keysToSend, noResultsMessage, "Should get no results message");
     }
 
     @Test
@@ -72,7 +72,7 @@ public class Scenario_05_ProductSearch {
         assertFalse(webDriver.getCurrentUrl().contains("error"), "Should not redirect to error page");
 
         String noResultsMessage = webDriver.findElement(By.xpath("/html/body/main/div[5]/div[2]/div[1]")).getText();
-        assertEquals("0 artikala pronađenih za traženi pojam " + keysToSend, noResultsMessage);
+        assertEquals("0 artikala pronađenih za traženi pojam " + keysToSend, noResultsMessage, "Should get no results message");
     }
 
     @Test
@@ -80,13 +80,11 @@ public class Scenario_05_ProductSearch {
         webDriver.findElement(By.id("js-site-search-input")).sendKeys("");
         webDriver.findElement(By.className("js_search_button")).click();
 
-        // Check what happens - might stay on same page, show all products, or show validation message
         String currentUrl = webDriver.getCurrentUrl();
 
-        // Option 1: Check if validation message appears
         List<WebElement> validationMessages = webDriver.findElements(By.xpath("//*[contains(text(), 'Please enter') or contains(text(), 'required')]"));
 
         // Option 2: Check if it stays on current page or shows all products
-        assertTrue(!validationMessages.isEmpty() || currentUrl.contains("search") || webDriver.findElements(By.className("product-item")).size() >= 1);
+        assertTrue(!validationMessages.isEmpty() || currentUrl.contains("search") || webDriver.findElements(By.className("product-item")).size() >= 1, "Should handle empty search gracefully");
     }
 }

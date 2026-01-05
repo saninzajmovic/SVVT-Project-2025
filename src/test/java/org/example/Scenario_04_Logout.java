@@ -37,7 +37,7 @@ public class Scenario_04_Logout {
         Thread.sleep(1000);
 
         String registerUrl = webDriver.getCurrentUrl();
-        String mail = "test1@gmai.com";
+        String mail = "test1@gmail.com";
 
         webDriver.findElement(By.id("j_username")).sendKeys(mail);
         webDriver.findElement(By.id("j_password")).sendKeys("ajNakafubrate!");
@@ -62,7 +62,7 @@ public class Scenario_04_Logout {
         webDriver.findElement(By.linkText("Odjavi se")).click();
 
         String loginLink = webDriver.findElement(By.className("login_link")).getText();
-        assertEquals("Prijava / Registracija", loginLink);
+        assertEquals("Prijava / Registracija", loginLink, "Should show register link");
 
         Thread.sleep(4000);
     }

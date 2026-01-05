@@ -36,12 +36,12 @@ class Scenario_01_HomepageAccessibility {
     @Test
     void testHttps() {
         String currentUrl = webDriver.getCurrentUrl();
-        assertEquals("https", currentUrl.substring(0, 5));
+        assertEquals("https", currentUrl.substring(0, 5), "Url should be https");
     }
 
     @Test
     void testBaseUrl() {
-        assertEquals(baseUrl, webDriver.getCurrentUrl());
+        assertEquals(baseUrl, webDriver.getCurrentUrl(), "https://www.ekupi.ba/ should have been opened");
     }
 
     @Test
@@ -49,7 +49,7 @@ class Scenario_01_HomepageAccessibility {
         WebElement logo = webDriver.findElement(
                 By.xpath("/html/body/main/header/nav[1]/div/div[1]/div/div/div/a/img")
         );
-        assertTrue(logo.isDisplayed());
+        assertTrue(logo.isDisplayed(), "Logo should be visible");
     }
 
     @Test
@@ -58,7 +58,7 @@ class Scenario_01_HomepageAccessibility {
                 By.xpath("/html/body/main/header/nav[1]/div/div[1]/div/div/div/a/img")
         );
 
-        assertEquals("eKupi logo", logo.getDomAttribute("title"));
+        assertEquals("eKupi logo", logo.getDomAttribute("title"), "Logo should have title attribute 'eKupi logo'");
     }
 
 }

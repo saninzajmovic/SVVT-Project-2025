@@ -1,6 +1,5 @@
 package org.example;
 
-import org.jspecify.annotations.Nullable;
 import org.junit.jupiter.api.*;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
@@ -14,7 +13,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class ProductFilteringSortingTest {
+public class Scenario_06_ProductFilteringSorting {
 
     private WebDriver driver;
     private WebDriverWait wait;

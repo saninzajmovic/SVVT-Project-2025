@@ -84,7 +84,7 @@ public class Scenario_12_ResponsiveDesign {
         // Actually click it to verify
         searchButton.click();
 
-        // Verify the click worked (adjust based on what should happen)
-        assertNotEquals("", webDriver.getCurrentUrl());
+        // Verify the click worked
+        assertEquals(baseUrl, webDriver.getCurrentUrl());
     }
 }

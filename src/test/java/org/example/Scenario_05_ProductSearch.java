@@ -84,7 +84,6 @@ public class Scenario_05_ProductSearch {
 
         List<WebElement> validationMessages = webDriver.findElements(By.xpath("//*[contains(text(), 'Please enter') or contains(text(), 'required')]"));
 
-        // Option 2: Check if it stays on current page or shows all products
         assertTrue(!validationMessages.isEmpty() || currentUrl.contains("search") || webDriver.findElements(By.className("product-item")).size() >= 1, "Should handle empty search gracefully");
     }
 }
